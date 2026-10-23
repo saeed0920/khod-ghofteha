@@ -1,16 +1,12 @@
-import Link from 'next/link';
+import { ChannelFeed } from '@/components/blog/channel-feed';
+import { PostBrowser } from '@/components/blog/post-browser';
+import { getPosts, toSummary } from '@/lib/blog';
 
 export default function HomePage() {
-  return (
-    <div className="flex flex-col justify-center text-center flex-1">
-      <h1 className="text-2xl font-bold mb-4">Hello World</h1>
-      <p>
-        You can open{' '}
-        <Link href="/docs" className="font-medium underline">
-          /docs
-        </Link>{' '}
-        and see the documentation.
-      </p>
-    </div>
-  );
+  const posts = getPosts();
+  const counts = new Map<string, number>();
+  for (const p of posts) for (const t of p.data.tags) counts.set(t, (counts.get(t) ?? 0) + 1);
+  const tags = [...counts].sort((a, b) => b[1] - a[1]).map(([name, count]) => ({ name, count }));
+
+  return <PostBrowser posts={posts.map(toSummary)} tags={tags} sidebar={<ChannelFeed posts={posts} />} />;
 }

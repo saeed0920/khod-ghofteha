@@ -1,0 +1,21 @@
+name: Check build
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install --frozen-lockfile
+      - run: bun run types:check
+      - run: bun run build
+        env:
+          GITHUB_PAGES: "true"
+          GITHUB_REPOSITORY: ${{ github.repository }}

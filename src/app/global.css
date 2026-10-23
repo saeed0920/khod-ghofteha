@@ -2,11 +2,139 @@
 @import 'fumadocs-ui/css/neutral.css';
 @import 'fumadocs-ui/css/preset.css';
 
+/* Mist Blue palette — see design.md */
+@theme {
+  --font-sans: var(--font-plex), Tahoma, sans-serif;
+
+  --color-page: #edf1f3;
+  --color-surface: #f7f9fa;
+  --color-card: #ffffff;
+  --color-line: #e1e7ea;
+  --color-line-strong: #d3dce1;
+  --color-ink: #1e2a33;
+  --color-ink-soft: #24323c;
+  --color-muted: #4c5d69;
+  --color-subtle: #5b6b77;
+  --color-accent: #2f5f7e;
+  --color-accent-strong: #1e445e;
+  --color-chip: #dfe8ed;
+  --color-chip-soft: #e8eff3;
+  --color-chip-ink: #2b4a5e;
+  --color-channel: #dce6ec;
+
+  /* Map Fumadocs UI (search dialog, code blocks, docs) onto the same palette. */
+  --color-fd-background: #edf1f3;
+  --color-fd-foreground: #1e2a33;
+  --color-fd-muted: #e8eff3;
+  --color-fd-muted-foreground: #4c5d69;
+  --color-fd-popover: #ffffff;
+  --color-fd-popover-foreground: #1e2a33;
+  --color-fd-card: #ffffff;
+  --color-fd-card-foreground: #1e2a33;
+  --color-fd-border: #e1e7ea;
+  --color-fd-primary: #2f5f7e;
+  --color-fd-primary-foreground: #ffffff;
+  --color-fd-secondary: #f7f9fa;
+  --color-fd-secondary-foreground: #1e2a33;
+  --color-fd-accent: #dfe8ed;
+  --color-fd-accent-foreground: #2b4a5e;
+  --color-fd-ring: #2f5f7e;
+}
+
 html {
   scrollbar-gutter: stable;
+  color-scheme: light;
+  scroll-padding-top: 6rem;
 }
 
 html > body[data-scroll-locked] {
   margin-right: 0px !important;
   --removed-body-scroll-bar-size: 0px !important;
+}
+
+body {
+  background: var(--color-page);
+  color: var(--color-ink);
+  line-height: 1.9;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Telegram-like message bubble: tail sits on the start (right) side in RTL. */
+.bubble {
+  border-radius: 16px 16px 4px 16px;
+}
+
+/* Long-form Persian reading: 17px mobile → 19px desktop, line-height 2.15. */
+.post-body {
+  font-size: 17px;
+  line-height: 2.15;
+  color: var(--color-ink-soft);
+  overflow-wrap: break-word;
+
+  & > :first-child { margin-top: 0; }
+  & p, & ul, & ol { margin: 0 0 18px; }
+  & ul, & ol { padding-inline-start: 1.5em; }
+  & ul { list-style: disc; }
+  & ol { list-style: persian; }
+  & li { margin-block: 4px; }
+  & li::marker { color: var(--color-accent); }
+
+  & h2, & h3, & h4 {
+    color: var(--color-ink);
+    font-weight: 700;
+    line-height: 1.6;
+  }
+  & h2 { margin: 32px 0 10px; font-size: 21px; }
+  & h3 { margin: 28px 0 8px; font-size: 18px; }
+
+  & a { color: var(--color-accent); text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+  & a:hover { color: var(--color-accent-strong); }
+  & strong { color: var(--color-ink); font-weight: 600; }
+  & hr { margin: 32px 0; border-color: var(--color-line); }
+  & img { border-radius: 14px; max-height: 70vh; width: auto; margin-inline: auto; }
+
+  & blockquote {
+    margin: 22px 0;
+    padding: 14px 16px;
+    background: var(--color-card);
+    border: 1px solid var(--color-line);
+    border-radius: 14px;
+    color: #2b3b47;
+    font-size: 17px;
+    font-weight: 500;
+    & p:last-child { margin-bottom: 0; }
+  }
+
+  & :not(pre) > code {
+    direction: ltr;
+    unicode-bidi: isolate;
+    font-size: 0.85em;
+    padding: 2px 6px;
+    border-radius: 6px;
+    background: var(--color-chip-soft);
+    color: var(--color-chip-ink);
+  }
+
+  & figure, & pre { direction: ltr; text-align: left; }
+  & figure { margin: 0 0 18px; }
+
+  & table { width: 100%; margin: 0 0 18px; border-collapse: collapse; font-size: 15px; }
+  & th, & td { border: 1px solid var(--color-line); padding: 8px 12px; text-align: start; }
+  & th { background: var(--color-surface); }
+
+  @media (width >= 64rem) {
+    font-size: 19px;
+    & p, & ul, & ol { margin-bottom: 22px; }
+    & h2 { margin: 40px 0 12px; font-size: 26px; }
+    & h3 { font-size: 20px; }
+    & blockquote { margin: 28px 0; padding: 16px 20px; font-size: 20px; border-radius: 16px; }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
 }

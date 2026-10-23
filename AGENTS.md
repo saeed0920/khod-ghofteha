@@ -52,6 +52,13 @@ mkdir -p /tmp/kg && ln -sfn "$PWD/out" /tmp/kg/khod-ghofteha && (cd /tmp/kg && p
 Push to `main` → `.github/workflows/deploy.yml` builds with
 `GITHUB_PAGES=true` (sets `basePath=/<repo>`) and publishes `out/` to
 GitHub Pages: https://saeed0920.github.io/khod-ghofteha/ .
+It also runs **hourly (cron)** so the home «تازه در کانال» panel stays fresh:
+`src/lib/telegram-feed.ts` fetches the public preview page `https://t.me/s/said_to_who_reads`
+at build time (no bot/token). If t.me is unreachable (local dev in Iran) the panel
+falls back to the latest imported posts; build locally through a proxy with
+`NODE_USE_ENV_PROXY=1 HTTPS_PROXY=http://127.0.0.1:10809 bun run build`.
+Live feed text is shown as-is (only clamped); it does **not** create blog posts —
+new posts still come from an export import.
 PRs run `.github/workflows/check.yml` (types + build).
 Repo Settings → Pages → Source must be **GitHub Actions**.
 
@@ -64,6 +71,7 @@ Repo Settings → Pages → Source must be **GitHub Actions**.
 | `src/app/(home)/page.tsx` + `components/blog/post-browser.tsx` | Home: hero search, tag chips, list, load-more; filter state ↔ `?tag=&q=` |
 | `src/app/(home)/blog/[slug]/page.tsx` | Post page (`/blog/<telegram id>/`) |
 | `src/app/(home)/blog/page.tsx` | Archive grouped by Persian month |
+| `src/lib/telegram-feed.ts` + `components/blog/channel-feed.tsx` | «تازه در کانال»: build-time t.me/s scrape, fallback to imported posts |
 | `src/app/search-index.json/route.ts` | Static full-text index, lazy-loaded by home search |
 | `src/app/global.css` | Mist Blue tokens (`@theme`), `.post-body` reading typography |
 | `design.md`, `design/*.html` | Design reference (Mist Blue RTL mock) |

@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  # Rebuild hourly so «تازه در کانال» shows the latest Telegram posts (fetched from t.me/s at build).
+  schedule:
+    - cron: "17 * * * *"
 
 permissions:
   contents: read

@@ -69,3 +69,6 @@ Commit (`content/blog`, `content/blog-tags.json`, code) and push to `main`.
 GitHub Actions `Deploy to GitHub Pages` publishes https://saeed0920.github.io/khod-ghofteha/ .
 Check: `gh run list --workflow deploy.yml -L 1` / `gh run watch`.
 Don't push without the user's go-ahead.
+
+Note: the «تازه در کانال» panel updates by itself (hourly rebuild scrapes t.me/s).
+Full blog posts for new messages still need this import flow.

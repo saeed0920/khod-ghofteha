@@ -16,8 +16,7 @@ export default function ArchivePage() {
 
   return (
     <main className="mx-auto max-w-[860px] px-4 pt-7 pb-4 md:px-6 md:pt-12 md:pb-20">
-      <h1 className="text-[26px] leading-[1.6] font-bold md:text-4xl">بایگانی</h1>
-      <p className="mb-6 text-[15px] text-[#52626e] md:mb-10 md:text-[17px]">{faNum(posts.length)} نوشته، از جدید به قدیم.</p>
+      <h1 className="mb-6 text-[26px] leading-[1.6] font-bold md:mb-10 md:text-4xl">بایگانی</h1>
       <div className="flex flex-col gap-5 md:gap-7">
         {[...groups].map(([month, items]) => (
           <section key={month} className="rounded-[18px] border border-line bg-card p-[18px] md:rounded-[20px] md:p-6">

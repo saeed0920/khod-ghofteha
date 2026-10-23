@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useRef } from 'react';
 import { Menu, Search, X } from 'lucide-react';
 import { appName, channel } from '@/lib/shared';
@@ -15,6 +15,20 @@ const links = [
 export function SiteHeader() {
   const pathname = usePathname();
   const menu = useRef<HTMLDetailsElement>(null);
+  const router = useRouter();
+
+  // Ctrl/⌘K: focus the home page search (no modal); from other pages go there first.
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (!((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k')) return;
+      e.preventDefault();
+      const input = document.getElementById('search');
+      if (input) input.focus();
+      else router.push('/#search');
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [router]);
 
   // Close the mobile menu after navigating.
   useEffect(() => {

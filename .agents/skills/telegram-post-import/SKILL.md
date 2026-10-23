@@ -70,5 +70,5 @@ GitHub Actions `Deploy to GitHub Pages` publishes https://saeed0920.github.io/kh
 Check: `gh run list --workflow deploy.yml -L 1` / `gh run watch`.
 Don't push without the user's go-ahead.
 
-Note: the «تازه در کانال» panel updates by itself (hourly rebuild scrapes t.me/s).
+Note: the «تازه در کانال» panel updates by itself (weekly rebuild, Saturday 03:17 UTC, scrapes t.me/s; trigger sooner with `gh workflow run deploy.yml`).
 Full blog posts for new messages still need this import flow.

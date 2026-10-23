@@ -52,7 +52,7 @@ mkdir -p /tmp/kg && ln -sfn "$PWD/out" /tmp/kg/khod-ghofteha && (cd /tmp/kg && p
 Push to `main` → `.github/workflows/deploy.yml` builds with
 `GITHUB_PAGES=true` (sets `basePath=/<repo>`) and publishes `out/` to
 GitHub Pages: https://saeed0920.github.io/khod-ghofteha/ .
-It also runs **hourly (cron)** so the home «تازه در کانال» panel stays fresh:
+It also runs **weekly (cron, Saturday 03:17 UTC)** so the home «تازه در کانال» panel stays fresh:
 `src/lib/telegram-feed.ts` fetches the public preview page `https://t.me/s/said_to_who_reads`
 at build time (no bot/token). If t.me is unreachable (local dev in Iran) the panel
 falls back to the latest imported posts; build locally through a proxy with
@@ -86,3 +86,4 @@ Repo Settings → Pages → Source must be **GitHub Actions**.
   no middleware, no `next/image` optimization). Internal links via `next/link`
   so `basePath` is applied; raw `fetch` must prefix `process.env.NEXT_PUBLIC_BASE_PATH`.
 - Search normalizes Arabic ي/ك → ی/ک and ZWNJ; keep that when touching search.
+- No search modal: Fumadocs search dialog is disabled; Ctrl/⌘K (handled in `SiteHeader`) focuses the home search input `#search`, navigating to `/#search` from other pages.

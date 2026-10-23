@@ -51,15 +51,6 @@ export function PostBrowser({
     setTag(params.get('tag'));
     setQ(params.get('q') ?? '');
     if (location.hash === '#search') input.current?.focus();
-
-    const onKey = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
-        e.preventDefault();
-        input.current?.focus();
-      }
-    };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
   }, []);
 
   // State → URL (written from handlers, not an effect, so Strict Mode's
@@ -110,7 +101,7 @@ export function PostBrowser({
           <label htmlFor="search" className="sr-only">
             جستجو در نوشته‌ها
           </label>
-          <div className="flex items-center gap-2.5 rounded-[14px] bg-card px-3.5 shadow-[0_6px_20px_rgba(30,42,51,0.06)] focus-within:ring-2 focus-within:ring-accent/30 md:px-4">
+          <div className="flex items-center gap-2.5 rounded-[14px] bg-card px-3.5 shadow-[0_6px_20px_rgba(30,42,51,0.06)] md:px-4">
             <Search size={20} className="flex-none text-subtle" aria-hidden />
             <input
               ref={input}

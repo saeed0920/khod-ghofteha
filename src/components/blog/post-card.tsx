@@ -1,16 +1,11 @@
 import Link from 'next/link';
 import type { PostSummary } from '@/lib/blog';
-import { Dot, TelegramIcon } from './telegram-icon';
+import { Dot } from './telegram-icon';
 
 export function PostCard({ post, onTag }: { post: PostSummary; onTag?: (tag: string) => void }) {
   return (
     <article className="flex flex-col gap-2.5 rounded-[18px] border border-line bg-card p-[18px] md:gap-3.5 md:p-[26px]">
-      <div className="flex items-center gap-2 text-xs font-medium text-muted md:text-[13px]">
-        <span className="flex size-6 items-center justify-center rounded-full bg-chip-soft text-accent">
-          <TelegramIcon size={13} />
-        </span>
-        پیام کانال <Dot /> {post.date}
-      </div>
+      <div className="text-xs font-medium text-muted md:text-[13px]">{post.date}</div>
       <h3 className="text-[19px] leading-[1.7] font-bold md:text-2xl md:leading-[1.65]">
         <Link href={post.url} className="text-ink hover:text-accent-strong">
           {post.title}

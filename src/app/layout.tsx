@@ -21,8 +21,8 @@ export default function Layout({ children }: LayoutProps<'/'>) {
   return (
     <html lang="fa" dir="rtl" className={font.variable}>
       <body className="flex min-h-screen flex-col">
-        {/* Light theme only: next-themes disabled, so no `.dark` class ever applies. */}
-        <RootProvider dir="rtl" theme={{ enabled: false }}>
+        {/* Light theme only (no `.dark` class ever). Fumadocs search dialog off: Ctrl/⌘K focuses home search (SiteHeader). */}
+        <RootProvider dir="rtl" theme={{ enabled: false }} search={{ enabled: false }}>
           {children}
         </RootProvider>
       </body>

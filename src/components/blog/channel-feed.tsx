@@ -49,14 +49,6 @@ export async function ChannelFeed({ posts }: { posts: Post[] }) {
           </a>
         );
       })}
-      <a
-        href={channel.url}
-        target="_blank"
-        rel="noopener"
-        className="flex min-h-12 items-center justify-center rounded-xl bg-accent text-[15px] font-semibold text-white hover:bg-accent-strong md:min-h-11 md:text-sm"
-      >
-        عضویت در کانال
-      </a>
     </section>
   );
 }
